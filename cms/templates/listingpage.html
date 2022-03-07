@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cms.in</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="m-4 text-center"> Customer Records <a href="/add/" class="btn btn-primary">AddCustomer</a></h1>
+    <table class="table table-bordered">
+        <tr class="bg-info text-white text-center ">
+            <td > Id  </td>
+            <td> Pic  </td>
+            <td> Name  </td>
+            <td> Joining Date  </td>
+            <td> Action  </td>
+        </tr>
+        {%for rec in records %}
+        <tr class="text-center">
+            <td>{{rec.id}}</td>
+            <td><img src="/media/{{rec.image}}"class="rounded-circle" height="70px" width="70px"></td>
+            <td>{{rec.name}}</td>
+            <td>{{rec.joining_date}}</td>
+            <td> <a href="/edit/{{rec.id}}" class="btn btn-success">Edit</a>/
+                <a href="/delete/{{rec.id}}" class="btn btn-danger">Delete</a>/
+                <a href="/view/{{rec.id}}" class="btn btn-primary">View</a>
+            </td>
+        </tr>
+    {%endfor%}
+    </table>
+</div>
+</body>
+</html>
