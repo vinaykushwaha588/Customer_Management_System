@@ -1,13 +1,12 @@
 from django.shortcuts import render,redirect
-
-# Create your views here.
 from .models import Customer
 from .forms import CustomerForm
+# Create your views here.
+
 def customer_list(request):
-    mydict={}
     records=Customer.objects.all()
-    mydict['records']=records
-    return render(request,'listingpage.html',mydict)
+    mydict={'records':records}
+    return render(request,'listingpage.html',context=mydict)
 
 def addCustomer(request):
     mydict={}
@@ -20,15 +19,13 @@ def addCustomer(request):
     return render(request,'addc.html',mydict)
 
 def editCustomer(request,id=None):
-    print(id)
     one_rec=Customer.objects.get(pk=id)
-    mydict={}
     form=CustomerForm(request.POST or None,request.FILES or None, instance=one_rec)
     if form.is_valid():
         form.save()
         return redirect('/')
-    mydict['form']=form
-    return render(request,'edit.html',mydict)
+    mydict= {'form':form}
+    return render(request,'edit.html',context=mydict)
 def deleteCustomer(request,eid=None):
     one_rec = Customer.objects.get(pk=eid)
     if  request.method=="POST":
